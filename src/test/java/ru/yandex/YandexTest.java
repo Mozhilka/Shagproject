@@ -22,7 +22,7 @@ public class YandexTest {
     public void driverSetup() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
     }
 
 
@@ -33,8 +33,8 @@ public class YandexTest {
         WebElement mailButton = driver.findElement(By.xpath("//*[@class='desk-notif-card__login-new-item-title' and text()='Почта']"));
         mailButton.click();
 
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("(//input[@class='Textinput-Control'])[20]")));
-        WebElement emailInputField = driver.findElement(By.xpath("//input[@class='Textinput-Control']"));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']")));
+        WebElement emailInputField = driver.findElement(By.xpath("//input[@type='text']"));
         emailInputField.sendKeys("mozhilka@tut.by");
 
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='passp:sign-in']")));
