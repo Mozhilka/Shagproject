@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class YandexTest {
@@ -22,11 +24,16 @@ public class YandexTest {
     @Test
     public void authTest1() {
 
-//        driver.get("https://yandex.by");
-//        WebElement mailButton = driver.findElement(By.xpath("//*[@class='desk-notif-card__login-new-item-title' and text()='Почта']"));
-//        mailButton.click();
+        driver.get("https://yandex.ru");
+        WebElement mailButton = driver.findElement(By.xpath("//*[@class='desk-notif-card__login-new-item-title' and text()='Почта']"));
+        mailButton.click();
 
-        driver.get("https://passport.yandex.by");
+        List<String> availableWindows = new ArrayList<String>(driver.getWindowHandles());
+        if (!availableWindows.isEmpty()) {
+            driver.switchTo().window(availableWindows.get(1));
+        }
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='passp-field-login']")));
+
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']")));
         WebElement emailInputField = driver.findElement(By.xpath("//input[@type='text']"));
         emailInputField.sendKeys("mozhilka@tut.by");
@@ -42,14 +49,6 @@ public class YandexTest {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='passp:sign-in']")));
         WebElement enterPasswordButton = driver.findElement(By.xpath("//button[@id='passp:sign-in']"));
         enterPasswordButton.click();
-
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@class='user-pic__image']")));
-        WebElement mailPage = driver.findElement(By.xpath("//img[@class='user-pic__image']"));
-        mailPage.click();
-
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='menu__text']")));
-        WebElement menuText = driver.findElement(By.xpath("//span[@class='menu__text']"));
-        menuText.click();
 
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='mail-Layout-Inner']")));
 
