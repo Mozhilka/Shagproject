@@ -1,10 +1,10 @@
 package com.shag.vitebsk.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class AuthPage {
-    private WebDriver driver;
+public class AuthPage extends BasePage{
+
+      String pageURL = "https://idemo.bspb.ru/auth/otp?authOptionId=SMS%3A10005";
 
     private static final By USERNAME_LOCATOR = By.name("username");
     private static final By PASSWORD_LOCATOR = By.name("password");
@@ -12,48 +12,38 @@ public class AuthPage {
     private static final By CODE_CONFIRMATION = By.id("otp-code");
     private static final By CONFIRMATION_BUTTON = By.id("login-otp-button");
     private static final By ERROR_MESSAGE = By.id("alerts-container");
-    private static final By PAYMENTS_AND_TRANSFERS = By.id("payments-form");
-    private static final By PAYMENT_HISTORY_BUTTON = By.xpath("//*[@class='payment-menu-icon history']");
-    private static final By PAYMENT_BACH_BUTTON = By.id("payment-back-action-url");
+    private static final By EXIT_BUTTON = By.xpath("//*[@class='icon-close']");
 
-    public AuthPage(WebDriver driver) {
-        this.driver = driver;
+
+    public AuthPage insertLogin(String login) {
+        type(USERNAME_LOCATOR,login);
+        return this;
     }
 
-    public void insertLogin(String login) {
-        driver.findElement(USERNAME_LOCATOR).sendKeys(login);
-    }
-
-    public void insertPassword(String password) {
-        driver.findElement(PASSWORD_LOCATOR).sendKeys(password);
+    public AuthPage insertPassword(String password) {
+        type(PASSWORD_LOCATOR, password);
+        return this;
     }
 
     public void clickSignInButton() {
-        driver.findElement(SIGN_IN_BUTTON_LOCATOR).click();
+        click(SIGN_IN_BUTTON_LOCATOR);
     }
 
-    public void insertCode(String code) {
-        driver.findElement(CODE_CONFIRMATION).sendKeys(code);
+    public AuthPage insertCode(String code) {
+        type(CODE_CONFIRMATION, code);
+        return this;
     }
 
     public void clickConfirmationButton() {
-        driver.findElement(CONFIRMATION_BUTTON).click();
+        click(CONFIRMATION_BUTTON);
     }
 
     public String getErrorMessage() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+        return getElementText(ERROR_MESSAGE);
     }
 
-    public void clickPaymentsAndTransfers() {
-        driver.findElement(PAYMENTS_AND_TRANSFERS).click();
-    }
-
-    public void clickPaymentHistoryButton() {
-        driver.findElement(PAYMENT_HISTORY_BUTTON).click();
-    }
-
-    public void clickPaymentBachButton() {
-        driver.findElement(PAYMENT_BACH_BUTTON).click();
+    public void clickExitButton() {
+        click(EXIT_BUTTON);
     }
 
 
@@ -64,7 +54,7 @@ public class AuthPage {
         insertCode("1111");
         clickConfirmationButton();
 
-        return new MainPage(driver);
+        return new MainPage();
     }
 
     public MainPage notFullAuth(String login, String password) {
@@ -72,14 +62,16 @@ public class AuthPage {
         insertPassword(password);
         clickSignInButton();
 
-        return new MainPage(driver);
+        return new MainPage();
     }
 
-    public MainPage paymentHistory() {
-        clickPaymentsAndTransfers();
-        clickPaymentHistoryButton();
-        clickPaymentBachButton();
+    public MainPage signOut() {
+        clickExitButton();
 
-        return new MainPage(driver);
+        return new MainPage();
+    }
+
+    public void openAuthPage() {
+        openUrl(pageURL);
     }
 }

@@ -1,40 +1,30 @@
 package com.shag.vitebsk.tests;
 
+import com.shag.vitebsk.driver.TestCaseID;
 import com.shag.vitebsk.pages.AuthPage;
 import com.shag.vitebsk.pages.MainPage;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class AuthorizationTest {
-    WebDriver driver;
+public class AuthorizationTest extends BaseTest {
     AuthPage authPage;
     MainPage mainPage;
 
-    By username = By.name("username");
-    By password = By.name("password");
-    By signInButton = By.id("login-button");
-
     @BeforeEach
     public  void start () {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        authPage = new AuthPage(driver);
-        mainPage = new MainPage(driver);
-        driver.get("https://idemo.bspb.ru/auth/otp?authOptionId=SMS%3A10005");
+        authPage = new AuthPage();
+        authPage.openAuthPage();
     }
 
+    @TestCaseID(id = "3")
     @Test
     public  void validAuthTest () {
-       mainPage = authPage.fullAuth("", "", "");
+        mainPage = authPage.fullAuth("", "", "");
 
         String userName = mainPage.getUserName();
-       Assertions.assertEquals("Hello World!", userName);
-
-        driver.quit();
+        Assertions.assertEquals("Hello World!", userName);
     }
 
+    @TestCaseID(id = "4")
     @Test
     public void invalidAuthTest () {
         mainPage = authPage.notFullAuth("", "1");
@@ -43,6 +33,7 @@ public class AuthorizationTest {
         Assertions.assertEquals("Неверные данные пользователя (осталось 2 попытки)", warningText);
     }
 
+    @TestCaseID(id = "5")
     @Test
     public void emptyPassword () {
         authPage.insertLogin("");
@@ -52,19 +43,17 @@ public class AuthorizationTest {
         Assertions.assertEquals("", warningText);
     }
 
+    @TestCaseID(id = "12")
     @Test
-    public void paymentsTest () {
-        mainPage = authPage.fullAuth("", "", "");
-        mainPage = authPage.paymentHistory();
+    public void signOutTest () {
+        authPage.signOut();
 
-        String confirmatoryText = mainPage.getPaymentPage();
-        Assertions.assertEquals("ПЛАТЕЖИ И ПЕРЕВОДЫ", confirmatoryText);
-
+        String confirmatoryText = mainPage.getAuthPage();
+        Assertions.assertEquals("Войти", confirmatoryText);
     }
 
     @AfterEach
     public void completed () {
-        driver.quit();
     }
 
 }
