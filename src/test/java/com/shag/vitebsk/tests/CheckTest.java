@@ -6,6 +6,7 @@ import com.shag.vitebsk.pages.CheckPage;
 import com.shag.vitebsk.pages.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CheckTest {
@@ -22,6 +23,7 @@ public class CheckTest {
     }
 
     @TestCaseID(id = "11")
+    @DisplayName("Открытие нового счета")
     @Test
     public void openNewChekTest () {
         mainPage = checkPage.openNewCheck();

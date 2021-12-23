@@ -6,6 +6,7 @@ import com.shag.vitebsk.pages.MainPage;
 import com.shag.vitebsk.pages.PaymentPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PaymentTest extends BaseTest {
@@ -21,6 +22,7 @@ public class PaymentTest extends BaseTest {
         mainPage = authPage.fullAuth("", "", "");
     }
     @TestCaseID(id = "6")
+    @DisplayName("История операций в системе")
     @Test
     public void paymentsTest () {
         mainPage = paymentPage.paymentHistory();
@@ -30,6 +32,7 @@ public class PaymentTest extends BaseTest {
 
     }
     @TestCaseID(id = "10")
+    @DisplayName("Возврат на страницу Платежи и переводы")
     @Test
     public void viewBalanceTest () {
         paymentPage.viewBalance();

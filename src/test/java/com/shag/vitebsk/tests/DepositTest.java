@@ -7,6 +7,7 @@ import com.shag.vitebsk.pages.MainPage;
 import com.shag.vitebsk.pages.PaymentPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -25,6 +26,7 @@ public class DepositTest extends BaseTest {
     }
 
     @TestCaseID(id = "7")
+    @DisplayName("Получение информации о карте Золотая")
     @Test
     public void openDepositTest () {
          depositPage.viewCards();

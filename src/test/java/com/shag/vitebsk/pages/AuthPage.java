@@ -12,7 +12,7 @@ public class AuthPage extends BasePage{
     private static final By CODE_CONFIRMATION = By.id("otp-code");
     private static final By CONFIRMATION_BUTTON = By.id("login-otp-button");
     private static final By ERROR_MESSAGE = By.id("alerts-container");
-    private static final By EXIT_BUTTON = By.xpath("//*[@class='icon-close']");
+    private static final By EXIT_BUTTON = By.id("logout-button");
 
 
     public AuthPage insertLogin(String login) {

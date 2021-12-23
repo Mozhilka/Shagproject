@@ -16,6 +16,7 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @TestCaseID(id = "3")
+    @DisplayName("Авторизация валидными данными")
     @Test
     public  void validAuthTest () {
         mainPage = authPage.fullAuth("", "", "");
@@ -25,6 +26,7 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @TestCaseID(id = "4")
+    @DisplayName("Авторизация невалидными данными")
     @Test
     public void invalidAuthTest () {
         mainPage = authPage.notFullAuth("", "1");
@@ -34,6 +36,7 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @TestCaseID(id = "5")
+    @DisplayName("Авторизация с пустыми полями")
     @Test
     public void emptyPassword () {
         authPage.insertLogin("");
@@ -44,8 +47,10 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @TestCaseID(id = "12")
+    @DisplayName("Выход из системы")
     @Test
     public void signOutTest () {
+        mainPage = authPage.fullAuth("", "", "");
         authPage.signOut();
 
         String confirmatoryText = mainPage.getAuthPage();

@@ -6,6 +6,7 @@ import com.shag.vitebsk.pages.CreditPage;
 import com.shag.vitebsk.pages.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CreditTest extends BaseTest {
@@ -22,6 +23,7 @@ public class CreditTest extends BaseTest {
     }
 
     @TestCaseID(id = "9")
+    @DisplayName("Невалидный запрос на перевод с карты")
     @Test
     public void openCreditCardTest () {
         mainPage = creditPage.translationRequest();
@@ -32,6 +34,7 @@ public class CreditTest extends BaseTest {
     }
 
     @TestCaseID(id = "8")
+    @DisplayName("Заявка на кредитную карту")
     @Test
     public void translationRequestTest () {
         mainPage = creditPage.openCreditCard();
