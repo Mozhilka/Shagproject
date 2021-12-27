@@ -1,13 +1,19 @@
 package com.shag.vitebsk.tests;
 
+import com.shag.vitebsk.driver.Slf4j;
 import com.shag.vitebsk.driver.TestCaseID;
 import com.shag.vitebsk.pages.AuthPage;
 import com.shag.vitebsk.pages.MainPage;
 import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class AuthorizationTest extends BaseTest {
     AuthPage authPage;
     MainPage mainPage;
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizationTest.class);
 
     @BeforeEach
     public  void start () {
@@ -19,6 +25,7 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация валидными данными")
     @Test
     public  void validAuthTest () {
+        logger.info("AuthTest");
         mainPage = authPage.fullAuth("", "", "");
 
         String userName = mainPage.getUserName();
@@ -29,6 +36,7 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация невалидными данными")
     @Test
     public void invalidAuthTest () {
+        logger.info("AuthTest");
         mainPage = authPage.notFullAuth("", "1");
 
         String warningText = authPage.getErrorMessage();
@@ -39,6 +47,7 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация с пустыми полями")
     @Test
     public void emptyPassword () {
+        logger.info("AuthTest");
         authPage.insertLogin("");
         authPage.clickSignInButton();
 
@@ -50,6 +59,7 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Выход из системы")
     @Test
     public void signOutTest () {
+        logger.info("AuthTest");
         mainPage = authPage.fullAuth("", "", "");
         authPage.signOut();
 

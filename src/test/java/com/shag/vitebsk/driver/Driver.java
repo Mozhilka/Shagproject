@@ -22,6 +22,9 @@ public class Driver {
                 case "chrome":
                     initChrome();
                     break;
+
+                case "Firefox":
+                    break;
             }
         }
         return driver;
@@ -35,6 +38,7 @@ public class Driver {
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
     }
     public static void tearDown() {
         driver.quit();
