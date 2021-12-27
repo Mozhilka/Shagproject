@@ -18,11 +18,9 @@ public class Driver {
             System.setProperty("driver", "chrome");
             String drvr = System.getProperty("driver");
             switch (drvr) {
-
                 case "chrome":
                     initChrome();
                     break;
-
                 case "Firefox":
                     break;
             }
@@ -31,8 +29,8 @@ public class Driver {
     }
 
     private static void initFF() {
-
     }
+
     private static void initChrome() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();

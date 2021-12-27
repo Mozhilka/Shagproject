@@ -13,8 +13,6 @@ public class AuthorizationTest extends BaseTest {
     AuthPage authPage;
     MainPage mainPage;
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthorizationTest.class);
-
     @BeforeEach
     public  void start () {
         authPage = new AuthPage();
@@ -25,7 +23,6 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация валидными данными")
     @Test
     public  void validAuthTest () {
-        logger.info("AuthTest");
         mainPage = authPage.fullAuth("", "", "");
 
         String userName = mainPage.getUserName();
@@ -36,7 +33,6 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация невалидными данными")
     @Test
     public void invalidAuthTest () {
-        logger.info("AuthTest");
         mainPage = authPage.notFullAuth("", "1");
 
         String warningText = authPage.getErrorMessage();
@@ -47,7 +43,6 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Авторизация с пустыми полями")
     @Test
     public void emptyPassword () {
-        logger.info("AuthTest");
         authPage.insertLogin("");
         authPage.clickSignInButton();
 
@@ -59,7 +54,6 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Выход из системы")
     @Test
     public void signOutTest () {
-        logger.info("AuthTest");
         mainPage = authPage.fullAuth("", "", "");
         authPage.signOut();
 

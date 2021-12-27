@@ -8,11 +8,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CheckTest {
     AuthPage authPage;
     MainPage mainPage;
     CheckPage checkPage;
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckTest.class);
 
     @BeforeEach
     public void setup() {
@@ -26,6 +30,7 @@ public class CheckTest {
     @DisplayName("Открытие нового счета")
     @Test
     public void openNewChekTest () {
+        logger.info("!!!CheckTest");
         mainPage = checkPage.openNewCheck();
 
         String confirmatoryText = mainPage.getOpenCheckPage();
